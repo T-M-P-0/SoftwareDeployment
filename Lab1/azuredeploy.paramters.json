@@ -3,17 +3,20 @@
      "contentVersion": "1.0.0.0",
 
      "parameters": {
-         "storageAccount": {
+         "storageAccountName": {
              "value": "devstore",
              "metadata": {
                  "description": "Name of storage account"
              }
          },
          "webAppName": {
-             "value": "webapp",
+             "value": "devwebapp",
              "metadata": {
                  "description": "Name of the web app"
              }
+         },
+         "gitRepoUrl": {
+             "value": "gitRepoUrl"
          }
      }
  }
