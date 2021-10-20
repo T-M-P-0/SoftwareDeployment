@@ -101,12 +101,16 @@ Note that if you want support for NFS file shares in Azure Files, use the premiu
 
 Before we define our web app we have to create an app service plan for it:
 
-**App service plan:**
+### App service plan:
 
 * An app always runs in an App Service Plan (E.g. Web Apps, API Apps, or Mobile Apps)
 * Defines the set of compute resources for a web app
 
 I will not mention all properties, only the important ones:
+
+`type`:
+
+* An appservice type is defined in `"Microsoft.Web/serverfarms"`
 
 `kind`:
 
@@ -115,175 +119,52 @@ I will not mention all properties, only the important ones:
 
 `sku`:
 
-* For the 
+* This defines the product we want to use for our app service
+  * We want a free tier account
+  * Therefore we set the property `tier` to `Free` and other properties like `family` to `F`
+  * Find tier description here (https://docs.microsoft.com/en-us/azure/search/search-sku-tier)
 
 
+### Web app resource
 
+For the web app we use our app service resource which we defined previously:
 
-## Output
+* Therefore we make use of the property `dependsOn`:
+  * Define inside "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+  * We reference a resource with type of an app service : `Microsoft.Web/serverfarms`
+  * And the name of the resouce
 
-{
-  "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Resources/deployments/azuredeploy",
-  "location": null,
-  "name": "azuredeploy",
-  "properties": {
-    "correlationId": "bae25872-175d-4288-bf03-8d5bf95c4d96",
-    "debugSetting": null,
-    "dependencies": [
-      {
-        "dependsOn": [
-          {
-            "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Web/serverfarms/AppServicePlan-lab1webapptesttompirch",
-            "resourceGroup": "Web-Applications",
-            "resourceName": "AppServicePlan-lab1webapptesttompirch",
-            "resourceType": "Microsoft.Web/serverfarms"
-          }
-        ],
-        "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Web/sites/lab1webapptesttompirch",
-        "resourceGroup": "Web-Applications",
-        "resourceName": "lab1webapptesttompirch",
-        "resourceType": "Microsoft.Web/sites"
-      },
-      {
-        "dependsOn": [
-          {
-            "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Web/sites/lab1webapptesttompirch",
-            "resourceGroup": "Web-Applications",
-            "resourceName": "lab1webapptesttompirch",
-            "resourceType": "Microsoft.Web/sites"
-          }
-        ],
-        "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Web/sites/lab1webapptesttompirch/sourcecontrols/web",
-        "resourceGroup": "Web-Applications",
-        "resourceName": "lab1webapptesttompirch/web",
-        "resourceType": "Microsoft.Web/sites/sourcecontrols"
-      }
-    ],
-    "duration": "PT1M27.2028001S",
-    "error": null,
-    "mode": "Incremental",
-    "onErrorDeployment": null,
-    "outputResources": [
-      {
-        "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Storage/storageAccounts/lab1storageacctompirich",
-        "resourceGroup": "Web-Applications"
-      },
-      {
-        "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Web/serverfarms/AppServicePlan-lab1webapptesttompirch",
-        "resourceGroup": "Web-Applications"
-      },
-      {
-        "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Web/sites/lab1webapptesttompirch",
-        "resourceGroup": "Web-Applications"
-      },
-      {
-        "id": "/subscriptions/3cad5f56-9be4-422c-98bd-71742ad82932/resourceGroups/Web-Applications/providers/Microsoft.Web/sites/lab1webapptesttompirch/sourcecontrols/web",
-        "resourceGroup": "Web-Applications"
-      }
-    ],
-    "outputs": null,
-    "parameters": {
-      "gitRepoUrl": {
-        "type": "String",
-        "value": "https://github.com/Azure-Samples/nodejs-docs-hello-world"
-      },
-      "location": {
-        "type": "String",
-        "value": "westeurope"
-      },
-      "storageAccountName": {
-        "type": "String",
-        "value": "lab1storageacctompirich"
-      },
-      "webAppName": {
-        "type": "String",
-        "value": "lab1webapptesttompirch"
-      }
-    },
-    "parametersLink": null,
-    "providers": [
-      {
-        "id": null,
-        "namespace": "Microsoft.Storage",
-        "providerAuthorizationConsentState": null,
-        "registrationPolicy": null,
-        "registrationState": null,
-        "resourceTypes": [
-          {
-            "aliases": null,
-            "apiProfiles": null,
-            "apiVersions": null,
-            "capabilities": null,
-            "defaultApiVersion": null,
-            "locationMappings": null,
-            "locations": [
-              "westeurope"
-            ],
-            "properties": null,
-            "resourceType": "storageAccounts"
-          }
-        ]
-      },
-      {
-        "id": null,
-        "namespace": "Microsoft.Web",
-        "providerAuthorizationConsentState": null,
-        "registrationPolicy": null,
-        "registrationState": null,
-        "resourceTypes": [
-          {
-            "aliases": null,
-            "apiProfiles": null,
-            "apiVersions": null,
-            "capabilities": null,
-            "defaultApiVersion": null,
-            "locationMappings": null,
-            "locations": [
-              "westeurope"
-            ],
-            "properties": null,
-            "resourceType": "serverfarms"
-          },
-          {
-            "aliases": null,
-            "apiProfiles": null,
-            "apiVersions": null,
-            "capabilities": null,
-            "defaultApiVersion": null,
-            "locationMappings": null,
-            "locations": [
-              "westeurope"
-            ],
-            "properties": null,
-            "resourceType": "sites"
-          },
-          {
-            "aliases": null,
-            "apiProfiles": null,
-            "apiVersions": null,
-            "capabilities": null,
-            "defaultApiVersion": null,
-            "locationMappings": null,
-            "locations": [
-              "westeurope"
-            ],
-            "properties": null,
-            "resourceType": "sites/sourcecontrols"
-          }
-        ]
-      }
-    ],
-    "provisioningState": "Succeeded",
-    "templateHash": "4714874713233581368",
-    "templateLink": null,
-    "timestamp": "2021-10-13T04:06:29.895250+00:00",
-    "validatedResources": null
-  },
-  "resourceGroup": "Web-Applications",
-  "tags": null,
-  "type": "Microsoft.Resources/deployments"
-}
+* The `type` of an web app is defined as `Microsoft.Web/sites`
 
-## Parameters
+Next we would like to define the language of the server
 
-dasd
+* We can define certain stuff for our server in the property `properties`
+* Our server will run on node
+  * I defined theses settings as a variable called `nodeConfig`
+  * I choose the default settings for a node app
+* I defined the settings for the node server in
+* We also define in the `properties` the `serverFarmId`
+
+### Use a project
+
+Now we would like to deploy a nodejs project
+
+* In my arm template we use a project from a git repository
+* For that we define again a resource of type `sourcecontrols`
+* This resource depends on our web app:
+
+```JSON
+  "dependsOn": ["[resourceId('Microsoft.Web/sites', parameters('webAppName'))]"]
+```
+
+* The URL for the git repo is passed in the parameters `gitRepoUrl` it is called
+* The master branch is cloned (defined in `branch`)
+
+## Parameter file
+
+In the parameter we define all the parameters which we need our application. We have three parameters which we need for our application:
+
+* Name of the storage account
+* Name of the web app
+* URL to the git repository which includes the nodejs project for our web app
+
