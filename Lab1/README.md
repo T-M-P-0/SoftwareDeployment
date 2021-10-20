@@ -29,13 +29,12 @@
 
 **What is a storage account:**
 
-"
 * A storage account is a container that bands a set of Azure Storage services togethe
 * Only data services from Azure Storage can be comprised in a storage account. 
 * Integrating data services into a storage account allows the user to manage them as a group. 
 * The settings specified while creating the account, or setting that is changed after creation, is applicable everywhere. 
 * Once the storage account gets deleted, all the data stored inside gets removed.
-"
+
 (SERVERLESS360, https://www.serverless360.com/azure-storage-account, Last-Access: 13.10.2021)
 
 ### Required properties
