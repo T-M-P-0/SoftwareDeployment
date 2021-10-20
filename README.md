@@ -1,2 +1,3 @@
-# SoftwareDeployment
-Repo containing my exercises
+# SoftwareDeployment Exercises
+
+This repo contais my exercises for software deployment.
