@@ -72,7 +72,7 @@ Combination of:
 **`sku`**:
 
 Stock Keeping Unit (SKU) describes the product we choose for our resource.
-For storage accounts we can choose among for options for data protection
+For storage accounts we can choose among four options for data protection
 
 * We choose the cheapest option 
   * Locally redundant storage (LRS)
