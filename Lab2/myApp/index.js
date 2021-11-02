@@ -3,9 +3,14 @@ const app = express();
 const port = 7000;
 
 app.get("/", (req, res) => {
-    res.send("Welcome")
+    let result = sayHello();
+    res.send({ Message: result });
 });
 
-app.listen(port, () => {
-    console.log(`Server is listening at http://localhost:${port}`)
+module.exports = app.listen(port, () => {
+    console.log(`Server is listening at http://localhost:${port}`);
 });
+
+function sayHello() {
+    return "Hello";
+}
