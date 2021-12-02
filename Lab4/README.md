@@ -62,3 +62,9 @@ We have two config files for:
 `kubectl get pvc`
 
 ![image info](./Images/PersistentVCheck.JPG "PersistentVolume check")
+
+* Verify if our wordpress service is running:
+
+`kubectl get services wordpress`
+
+![image info](./Images/VerifyWordpress.JPG "PersistentVolume check")
