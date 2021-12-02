@@ -4,8 +4,6 @@
 
 URL of Cluster: 20.103.16.254
 
-Screenshot
-
 ## Relevant files
 
 ### Kustomization file
@@ -15,7 +13,7 @@ Screenshot
   * WordPress
 * Secret generator
   * Object that stores sensitive data (password or key)
-  * In our case we store 
+  * In our case we storeo the password for our mysql db 
 
 ### Configuration files for MySQL and WordPress
 
@@ -30,7 +28,7 @@ We have two config files for:
   * File name: wordpress-deployment.yaml 
 * MySQL
   * Mounts PersistenVolume at /var/lib/mysql
-  * The password which we set in the screts of the `kustomization.yaml` will be replaces by the environment variable
+  * The password which we set in the secrets of the `kustomization.yaml` will be replaces by the environment variable
 	`MYSQL_ROOT_PASSWORD`
   * File name: mysql-deployment.yaml 
 
@@ -43,9 +41,9 @@ We have two config files for:
 
 * Create Kubernetes cluster:
 
-`az aks get-credentials --resource-group myResourceGroup --name myAKSCluster`
+`az aks get-credentials --resource-group Name --name myAKSCluster`
 
-* We can verify the connectio to our cluster with:
+* We can verify the connection to our cluster with:
 
 `kubectl get nodes`
 
