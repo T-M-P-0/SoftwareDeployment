@@ -63,7 +63,7 @@ We have two config files for:
 
 ![image info](./Images/PersistentVCheck.JPG "PersistentVolume check")
 
-* Verify if our wordpress service is running:
+* Check if our wordpress service is running:
 
 `kubectl get services wordpress`
 
