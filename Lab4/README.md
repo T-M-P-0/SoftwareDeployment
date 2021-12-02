@@ -2,25 +2,65 @@
 
 ## Aufsetzen und Konfiguration eines AKS in Azure
 
-URL of Cluster:
+URL of Cluster: 20.103.16.254
 
 Screenshot
 
-## Files
+## Relevant files
 
-kustomization.yaml 
+### Kustomization file
 
-We need the resource config files for
+* This file will contain resource configs for:
+  * MYSQL
+  * WordPress
+* Secret generator
+  * Object that stores sensitive data (password or key)
+  * In our case we store 
 
-They will be used for our single instance MySQL and Wordpress deployment. Both will mount a persistent volume in a specified path
+### Configuration files for MySQL and WordPress
 
+* In our configuration files we require a PersistentVolume to store our data
+  * This will be created during the deployment step
+=> For this we create a PersistentVolumeClaim => PersistentVolumne is
+dynamically provided based on the StorageClass configuration
+
+We have two config files for:
 * Wordpress 
-  * wordpress-deployment.yaml 
+  * Mounts PersistenVolume at /var/www/html
+  * File name: wordpress-deployment.yaml 
 * MySQL
-  * mysql-deployment.yaml 
-
+  * Mounts PersistenVolume at /var/lib/mysql
+  * The password which we set in the screts of the `kustomization.yaml` will be replaces by the environment variable
+	`MYSQL_ROOT_PASSWORD`
+  * File name: mysql-deployment.yaml 
 
 
 ## Konfiguration und deplyoment von Wordpress incl. MySQL in dem AKS cluster 
 
+* After we created a resource group: 
 
+`az group create --name Name --location Location`
+
+* Create Kubernetes cluster:
+
+`az aks get-credentials --resource-group myResourceGroup --name myAKSCluster`
+
+* We can verify the connectio to our cluster with:
+
+`kubectl get nodes`
+
+![image info](./Images/VerifyConnectionCluster.JPG "Deploy resources")
+
+* Run the kustomization.yaml file which contain all resources for deploying a MySQL database and our wordpress service:
+  * Apply it on the directory:
+
+`kubectl apply -k ./`
+
+
+![image info](./Images/Deploy.JPG "Verify connection to cluster")
+
+* Verify that PersistentVolume got provisioned:
+
+`kubectl get pvc`
+
+![image info](./Images/PersistentVCheck.JPG "PersistentVolume check")
