@@ -2,7 +2,7 @@
 
 ## Aufsetzen und Konfiguration eines AKS in Azure
 
-URL of Cluster: 20.103.16.254
+URL of the cluster: 20.103.16.254
 
 ## Relevant files
 
