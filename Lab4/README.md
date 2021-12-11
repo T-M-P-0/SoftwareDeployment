@@ -1,6 +1,6 @@
-# Lab 4 
+# Lab 4
 
-## Aufsetzen und Konfiguration eines AKS in Azure
+## Deploy and configure a AKS in Azure
 
 URL of the cluster: 20.103.16.254
 
@@ -13,7 +13,7 @@ URL of the cluster: 20.103.16.254
   * WordPress
 * Secret generator
   * Object that stores sensitive data (password or key)
-  * In our case we storeo the password for our mysql db 
+  * In our case we storeo the password for our mysql db
 
 ### Configuration files for MySQL and WordPress
 
@@ -23,21 +23,24 @@ URL of the cluster: 20.103.16.254
 dynamically provided based on the StorageClass configuration
 
 We have two config files for:
-* Wordpress 
+
+* Wordpress
   * Mounts PersistenVolume at /var/www/html
-  * File name: wordpress-deployment.yaml 
+  * File name: wordpress-deployment.yaml
 * MySQL
   * Mounts PersistenVolume at /var/lib/mysql
-  * The password which we set in the secrets of the `kustomization.yaml` will be replaces by the environment variable
-	`MYSQL_ROOT_PASSWORD`
-  * File name: mysql-deployment.yaml 
-
+  * The password which we set in the secrets of the `kustomization.yaml` will be replaces by the environment variable `MYSQL_ROOT_PASSWORD`
+  * File name: mysql-deployment.yaml
 
 ## Konfiguration und deplyoment von Wordpress incl. MySQL in dem AKS cluster 
 
-* After we created a resource group: 
+* After we created a resource group:
 
 `az group create --name Name --location Location`
+
+* Create cluster:
+
+`az aks create --resource-group Name --name myAKSCluster --node-count 1 --enable-addons monitoring --generate-ssh-keys`
 
 * Set up connection to Kubernetes cluster:
 
@@ -54,7 +57,6 @@ We have two config files for:
 
 `kubectl apply -k ./`
 
-
 ![image info](./Images/Deploy.JPG "Verify connection to cluster")
 
 * Verify that PersistentVolume got provisioned:
@@ -67,4 +69,4 @@ We have two config files for:
 
 `kubectl get services wordpress`
 
-![image info](./Images/VerifyWordpress.JPG "PersistentVolume check")
+![image info](./Images/VerifyWordpress.JPG "CheckWordPress check")
