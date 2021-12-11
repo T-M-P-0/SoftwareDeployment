@@ -4,6 +4,8 @@ services:
     build: ./MySQL
     image: mymysqlimage
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
     volumes:
       - dbdata:/var/lib/mysql
   wordpress:
