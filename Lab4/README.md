@@ -39,7 +39,7 @@ We have two config files for:
 
 `az group create --name Name --location Location`
 
-* Create Kubernetes cluster:
+* Set up connection to Kubernetes cluster:
 
 `az aks get-credentials --resource-group Name --name myAKSCluster`
 
